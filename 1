@@ -1,0 +1,152 @@
+li = [["_", "_", "_"], ["_", "_", "_"], ["_", "_", "_"]]
+li_new = []
+for q in li:
+    li_new.extend(q)
+
+print("---------")
+print("|", li[0][0], li[0][1], li[0][2], "|")
+print("|", li[1][0], li[1][1], li[1][2], "|")
+print("|", li[2][0], li[2][1], li[2][2], "|")
+print("---------")
+
+x_num = 0
+o_num = 0
+
+count_x = 0
+count_o = 0
+
+
+def check(g, f):
+    if int(g) == 1:
+        if int(f) == 1:
+            if li[2][0] == "_":
+                return True
+            else:
+                return False
+        if int(f) == 2:
+            if li[1][0] == "_":
+                return True
+            else:
+                return False
+        if int(f) == 3:
+            if li[0][0] == "_":
+                return True
+            else:
+                return False
+    elif int(g) == 2:
+        if int(f) == 1:
+            if li[2][1] == "_":
+                return True
+            else:
+                return False
+        if int(f) == 2:
+            if li[1][1] == "_":
+                return True
+            else:
+                return False
+        if int(f) == 3:
+            if li[0][1] == "_":
+                return True
+            else:
+                return False
+    elif int(g) == 3:
+        if int(f) == 1:
+            if li[2][2] == "_":
+                return True
+            else:
+                return False
+        if int(f) == 2:
+            if li[1][2] == "_":
+                return True
+            else:
+                return False
+        if int(f) == 3:
+            if li[0][2] == "_":
+                return True
+            else:
+                return False
+
+
+
+uuu = True
+while uuu is True:
+    cor_row, cor_column = input("Enter the coordinates: > ").split()
+    ran = ["1", "2", "3"]
+
+    while cor_column.isalnum() or cor_row.isalnum():
+        if cor_column not in ran or cor_row not in ran:
+            if cor_row.isalpha() or cor_column.isalpha():
+                print("You should enter numbers!")
+                cor_row, cor_column = input("Enter the coordinates: > ").split()
+            else:
+                print("Coordinates should be from 1 to 3!")
+                cor_row, cor_column = input("Enter the coordinates: > ").split()
+        if cor_column in ran and cor_row in ran:
+            if check(cor_row, cor_column) is False:
+                print("This cell is occupied! Choose another one!")
+                cor_row, cor_column = input("Enter the coordinates: > ").split()
+            elif check(cor_row, cor_column) is True:
+                kor = "_"
+                if count_x == count_o == 0:
+                    kor = "X"
+                elif count_x > count_o:
+                    kor = "O"
+                else:
+                    kor = "X"
+
+                if int(cor_row) == 1:
+                    if int(cor_column) == 1:
+                        li[2][0] = kor
+                    if int(cor_column) == 2:
+                        li[1][0] = kor
+                    if int(cor_column) == 3:
+                        li[0][0] = kor
+                elif int(cor_row) == 2:
+                    if int(cor_column) == 1:
+                        li[2][1] = kor
+                    if int(cor_column) == 2:
+                        li[1][1] = kor
+                    if int(cor_column) == 3:
+                        li[0][1] = kor
+                elif int(cor_row) == 3:
+                    if int(cor_column) == 1:
+                        li[2][2] = kor
+                    if int(cor_column) == 2:
+                        li[1][2] = kor
+                    if int(cor_column) == 3:
+                        li[0][2] = kor
+
+                print("---------")
+                print("|", li[0][0], li[0][1], li[0][2], "|")
+                print("|", li[1][0], li[1][1], li[1][2], "|")
+                print("|", li[2][0], li[2][1], li[2][2], "|")
+                print("---------")
+
+                li_new = []
+                for q in li:
+                    li_new.extend(q)
+                print(li_new)
+
+                count_x = li_new.count("X")
+                count_o = li_new.count("O")
+                print(count_o, count_x)
+                if count_x + count_o == 9:
+                    print("Draw")
+                    uuu = False
+
+                for i in range(3):
+                    if li[0][i] == li[1][i] == li[2][i] != "_" or li[i][0] == li[i][1] == li[i][2] != "_" or \
+                            li[0][0] == li[1][1] == li[2][2] != "_" or li[2][0] == li[1][1] == li[0][2] != "_":
+                        print(kor, "wins")
+                        uuu = False
+                break
+
+
+
+
+
+
+
+
+
+
